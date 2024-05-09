@@ -1,18 +1,8 @@
-import {
-  AuthBindings,
-  Authenticated,
-  GitHubBanner,
-  Refine,
-} from "@refinedev/core";
+import { AuthBindings, Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
-import {
-  ErrorComponent,
-  notificationProvider,
-  RefineSnackbarProvider,
-  ThemedLayoutV2,
-} from "@refinedev/mui";
+import { ErrorComponent, notificationProvider, RefineSnackbarProvider, ThemedLayoutV2 } from "@refinedev/mui";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
@@ -28,18 +18,8 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { CredentialResponse } from "./interfaces/google";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
+import { BlogPostCreate, BlogPostEdit, BlogPostList, BlogPostShow } from "./pages/blog-posts";
+import { CategoryCreate, CategoryEdit, CategoryList, CategoryShow } from "./pages/categories";
 import { Login } from "./pages/login";
 import { parseJwt } from "./utils/parse-jwt";
 
@@ -132,7 +112,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
@@ -176,20 +155,14 @@ function App() {
                 <Routes>
                   <Route
                     element={
-                      <Authenticated
-                        key="authenticated-inner"
-                        fallback={<CatchAllNavigate to="/login" />}
-                      >
+                      <Authenticated key="authenticated-inner" fallback={<CatchAllNavigate to="/login" />}>
                         <ThemedLayoutV2 Header={() => <Header sticky />}>
                           <Outlet />
                         </ThemedLayoutV2>
                       </Authenticated>
                     }
                   >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
+                    <Route index element={<NavigateToResource resource="blog_posts" />} />
                     <Route path="/blog-posts">
                       <Route index element={<BlogPostList />} />
                       <Route path="create" element={<BlogPostCreate />} />
@@ -206,10 +179,7 @@ function App() {
                   </Route>
                   <Route
                     element={
-                      <Authenticated
-                        key="authenticated-outer"
-                        fallback={<Outlet />}
-                      >
+                      <Authenticated key="authenticated-outer" fallback={<Outlet />}>
                         <NavigateToResource />
                       </Authenticated>
                     }
